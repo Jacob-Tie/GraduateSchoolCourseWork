@@ -1,0 +1,11 @@
+# Description of Files:
+## Summary
+These files attempt to replicate the work of [1] in order to gain a better understanding of using machine learning in genomic data. Note that all file paths have been replaced with generic ones
+## Replicate_L1_Linear_Coord_Desc.py and .sh
+The .py file uses a coordinate descent (a scikit learn implementation) algorithm to find the solution to the lasso linear regression problem. This gets fairly close to the correlation and accuracy reported by [1], though the value of lambda used in this code will somewhat under preform on the test set when compared to other choices of lambda since my goal was to illustrate what this method is capable of, however, due to memory limitations I am unable to use the full dataset for this method (scikit learn forces all of it's matrices to be 64 bit which presents a problem for this problem space) so attaining the exact results of the authors would be challenging (if not impossible). The .sh file is for job submission to slurm based computing clusters.
+## Replicate_L1_Linear_Grad_Desc.py and .sh
+The .py file uses gradient descent (a scikit learn implementation) algorithm to find the solution to the lasso linear regression problem. This file is designed to illustrate a problem with this data: that the type of optimization algorithm used is important. In my experiments I was unable to find a set of hyper-parameters that would give a solution other than the zero solution (all of the weights of the linear model are zero). This suggests several potential problems ranging from extremely slow convergence rates of this algorithm to a potential tendency to get stuck at a local minimum (this implementation seems to forgo the use of tricks which would make this optimization problem convex). The .sh file is for job submission to slurm based computing clusters.
+## Covariate_Generation.py
+This file generates .npys for the covariates sex and age. It also generates a boolean vector of what individuals have non-missing target, sex, and age values. NOTE: there is no .sh file associated with this since I was able to use an interactive session to run this since the script takes very little time to run.
+## Sources
+[1] Lello, L., Avery, S. G., Tellier, L., Vazquez, A. I., Campos, G. D., & Hsu, S. D. (2017). Accurate Genomic Prediction Of Human Height. doi:10.1101/190124
